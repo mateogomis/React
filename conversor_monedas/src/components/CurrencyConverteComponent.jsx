@@ -1,25 +1,15 @@
-// CurrencyConverterComponent.js
 import React from 'react';
+import CustomInput from './CustomInput';
 import useCurrencyConverter from '../hooks/useCurrencyConvert';
 
-
 const CurrencyConverterComponent = () => {
-  const { euros, setEuros, convertToDollars } = useCurrencyConverter();
-  
-  
-  console.log("Euros:", euros);
-  const dollars = convertToDollars(euros);
-  console.log("Dollars:", dollars);
-
-  const handleInputChange = (e) => {
-    const amount = e.target.value ? parseFloat(e.target.value) : 0;
-    setEuros(amount);
-  };
+  const { euros, dollars, handleInputChange } = useCurrencyConverter();
 
   return (
     <div>
-      <input type="number" value={euros} onChange={handleInputChange} />
+      <CustomInput value={euros} onChange={handleInputChange} type="euros" />
       <p>{euros} euros son {dollars} dólares</p>
+      <CustomInput value={dollars} onChange={handleInputChange} type="dollars" />
     </div>
   );
 };

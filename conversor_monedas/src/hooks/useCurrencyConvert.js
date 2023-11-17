@@ -1,28 +1,27 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 const useCurrencyConverter = () => {
-  const [euros, setEuros] = useState(0);
-  const [dollars, setDollars] = useState(0);
+  const [euros, setEuros] = useState('');
+  const [dollars, setDollars] = useState('');
 
-  const convertToDollars = (amount) => {
-    const dollars = amount * 1.13;
-    return dollars.toFixed(2);
-  };
+  const handleInputChange = useCallback((value, type) => {
+    // Verificar si el valor ingresado es numérico
+    const numericValue = parseFloat(value);
 
-  const convertToEuros = (amount) => {
-    const euros = amount / 1.13;
-    return euros.toFixed(2);
-  };
-
-  const handleInputChange = (amount, type) => {
-    if (type === 'euros') {
-      setEuros(amount);
-      setDollars(convertToDollars(amount));
-    } else if (type === 'dollars') {
-      setDollars(amount);
-      setEuros(convertToEuros(amount));
+    if (!isNaN(numericValue)) {
+      if (type === 'euros') {
+        setEuros(value);
+        setDollars((numericValue * 1.13).toFixed(2));
+      } else if (type === 'dollars') {
+        setDollars(value);
+        setEuros((numericValue / 1.13).toFixed(2));
+      }
+    } else {
+      // Si el valor no es numérico, dejar el campo vacío
+      setEuros('');
+      setDollars('');
     }
-  };
+  }, []);
 
   return { euros, dollars, handleInputChange };
 };

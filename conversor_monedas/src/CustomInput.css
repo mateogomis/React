@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ocupa toda la altura visible del viewport */
+    background-color: #66ff99; /* Color de fondo verde */
+  }
+  
+  .custom-input {
+    border: none;
+    border-bottom: 1px solid #000;
+    width: 80%; /* Ajusta el ancho */
+    background-color: #ffffff; /* Color de fondo de los inputs */
+    /* Otros estilos que necesites */
+    margin: 10px; /* Añade un margen entre los CustomInput */
+  }
+  
